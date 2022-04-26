@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import "app/theme/variables";
+
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-icons/font/bootstrap-icons";
+
+h1 {
+    //color:rgb(41, 195, 157);
+    color:$primary-dark;  
+}
+
+h4,h3, h2 {
+    //color: #009688;
+    color: $primary;
+}
+
+.exercise-box {
+    background-color: $box-bkg;
+    border-radius: 20px;
+    box-shadow: $custom-box-shadow;
+    margin: 2rem;
+    padding: 1rem;
+}
+

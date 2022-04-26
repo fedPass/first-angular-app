@@ -1,0 +1,11 @@
+<div class="col-sm-12 col-md-6 m-auto border">
+    <div class="row g-0" *ngFor="let row of board;let x = index">
+        <div class="col-4 border g-0" *ngFor="let cellStatus of row;let y = index">
+            <app-tictactoe-cell 
+                [status]="cellStatus"
+                (click)="onCellClick(x,y)"
+            ></app-tictactoe-cell>
+        </div>
+    </div>
+</div>
+

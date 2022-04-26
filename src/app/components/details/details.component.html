@@ -1,0 +1,144 @@
+<div *ngIf="game$ | async as game">
+    <!-- test per vedere se prendo dati  -->
+    <!-- <div class="col-8 m-auto">
+        <div >
+            {{game | json}}
+        </div>
+    </div> -->
+    
+    <!-- jumbotron -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="jumbotron p-5 mb-4" [style.background-image]="'url('+ game.background_image +')'">
+                <div class="overlay"></div>
+                <div class="info-box py-5">
+                    <h1 class="display-5 fw-bold">{{game.name}}</h1>
+                    <p class="col-md-8 fs-6">Released: {{game.released | date:'MMM YYYY'}}</p>
+                    <p class="col-md-8 fs-6">{{game.reviews_count}} reviews</p>
+                    <p><i class="bi bi-star-fill me-2"></i>{{game.rating}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- game info -->
+    <div class="container mb-5">
+        <!-- pills -->
+        <div class="row d-none d-md-block">
+            <div class="d-flex align-items-start">
+                <div class="nav flex-column nav-pills me-3 col-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link active" id="v-pills-description-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-description" type="button" role="tab" aria-controls="v-pills-description"
+                        aria-selected="true">Description</button>
+                    <button class="nav-link" id="v-pills-genre-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-genre" type="button" role="tab" aria-controls="v-pills-genre"
+                        aria-selected="false">Genre</button>
+                    <button class="nav-link" id="v-pills-platform-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-platform" type="button" role="tab" aria-controls="v-pills-platform"
+                        aria-selected="false">Available for</button>
+                    <button class="nav-link" id="v-pills-screen-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-screen" type="button" role="tab" aria-controls="v-pills-screen"
+                        aria-selected="false">Screenshot</button>
+                </div>
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-description" role="tabpanel"
+                        aria-labelledby="v-pills-description-tab">
+                        <p>{{game.description}}</p>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-genre" role="tabpanel"
+                        aria-labelledby="v-pills-genre-tab">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let genre of game.genres">{{genre.name}}</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-platform" role="tabpanel"
+                        aria-labelledby="v-pills-platform-tab">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let platform of game.platforms">{{platform.platform.name}}</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-screen" role="tabpanel"
+                        aria-labelledby="v-pills-screen-tab">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item" *ngFor="let screenshot of game.screenshots; let i = index"
+                                    [class.active]="i === 0">
+                                    <img [src]="screenshot.image" alt="cover of {{game.name}}" class="d-block w-100">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- versione large -->
+        <div class="row d-md-none">
+            <div class="row" *ngIf="game.description">
+                <div class="col-sm-12 col-md-4">
+                    <h3>Description</h3>
+                </div>
+                <div class="col-sm-12 col-md-8">
+                    <p>{{game.description}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row" *ngIf="game.genres.length">
+                <div class="col-sm-12 col-md-4">
+                    <h3>Genre</h3>
+                </div>
+                <div class="col-sm-12 col-md-8">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let genre of game.genres">{{genre.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row" *ngIf="game.genres.length">
+                <div class="col-sm-12 col-md-4">
+                    <h3>Available for:</h3>
+                </div>
+                <div class="col-sm-12 col-md-8">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let platform of game.platforms">{{platform.platform.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row" *ngIf="game.genres.length">
+                <!-- carousel -->
+                <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators" >
+                        <button type="button" *ngFor="let screenshot of game.screenshots; let i = index" 
+                            data-bs-target="#carouselExampleIndicators2" [attr.data-bs-slide-to]="i"
+                            [class.active]="i === 0" aria-current="true" [attr.aria-label]="i"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item" [class.active]="i === 0"
+                            *ngFor="let screenshot of game.screenshots; let i = index">
+                            <img [src]="screenshot.image" alt="cover of {{game.name}}" class="d-block w-100">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

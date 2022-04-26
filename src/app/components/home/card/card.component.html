@@ -1,0 +1,14 @@
+<div class="card" (click)="getGameTitle(game); openGameDetails(game.id)">
+    <img src={{game.background_image}} class="card-img-top" alt="copertina {{game.name}}">
+    <div class="card-body bg-dark text-white">
+        <h5 class="card-title text-center">{{game.name}}</h5>
+        <hr class="color-primary">
+        <div class="icon-box d-inline" *ngFor="let icon of game.platforms">
+            <!-- <i class={{icon}}></i> -->
+            <span>{{icon.platform.name}}</span>
+        </div>
+    </div>
+    <div class="card-footer bg-dark text-white text-end">
+        <span class="text-muted">{{game.released | date:'MMM YYYY'}}</span>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container my-3">
+    <div class="row justify-content-between">
+        <div class="col-12 mb-3">
+            <h1 class="text-center pt-5 pb-2">Create your Gamer Account</h1>
+        </div>
+        <div class="col-sm-12 col-md-5 m-auto exercise-box">
+            <h3 class="mb-2 text-center">Template Driven Form</h3>
+            <!-- inserisco nel form #nfRef e ngSubmit -->
+            <form #gamerForm="ngForm" (ngSubmit)="onSubmitTemplateForm(gamerForm)">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="usernameTemplate">@</span>
+                    <!-- negli input inseriamo attr name e ngModel -->
+                    <input required whiteSpace type="text" class="form-control" id="usernameTemplate" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="usernameTemplate" ngModel>
+                </div>
+                <div class="mb-3">
+                    <label for="emailTemplate" class="form-label">Email address</label>
+                    <input required type="email" class="form-control" id="emailTemplate" aria-describedby="emailHelp" name="emailTemplate" ngModel>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordTemplate" class="form-label">Password</label>
+                    <input required type="password" class="form-control" id="passwordTemplate" name="passwordTemplate" ngModel>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary text-white" [disabled]="!gamerForm.valid">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 col-md-5 m-auto exercise-box">
+            <h3 class="mb-2 text-center">Reactive Form (Model Driven)</h3>
+            <!-- uso form-group passando il form inizializzato nel costruttore del componente -->
+            <!-- non lo richiamo nella funzione perchè già è una proprietà del componente -->
+            <form [formGroup]="gamerReactiveForm" (ngSubmit)="onSubmitReactiveForm()">
+                <!-- hidden input per inviare l'id con il gamer in caso di update -->
+                <input type="hidden" id="idReactive" formControlName="id">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="usernameReactive">@</span>
+                    <!-- invece che name usiamo formControlName-->
+                    <input type="text" class="form-control" id="usernameReactive" placeholder="Username" 
+                        aria-label="Username" aria-describedby="username" formControlName="username">
+                    <!-- div per mostrare error in caso di username con whitespace -->
+                    <div class="alert alert-danger m-2" *ngIf="gamerReactiveForm.controls['username'].errors?.['whiteSpace']">
+                        Username can't contains white space.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="emailReactive" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="emailReactive" aria-describedby="emailHelp" formControlName="email">
+                </div>
+                <div class="mb-3">
+                    <label for="passwordReactive" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordReactive" formControlName="password">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary text-white" [disabled]="!gamerReactiveForm.valid">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5 ">
+        <div class="col-8 m-auto box-gamers" *ngIf="gamers$ | async as gamers">
+            <h3 class="text-center">Gamers List</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between" 
+                    [class.active]="gamerIdSelected === gamer.id" 
+                    *ngFor="let gamer of gamers; let i = index"
+                    (click)="onGamerClick(gamer)">
+                    <div>
+                        <p>
+                            <span class="text-primary fw-bold"
+                                [class.text-dark]="gamerIdSelected === gamer.id">#{{i+1}}</span>
+                             - Username: {{gamer.username}} - Email: {{gamer.email}}
+                        </p>
+                    </div>
+                    <button type="button" class="btn btn-primary text-white" 
+                        (click)="deleteGamer(gamer.id)"
+                        [class.border.border-white]="gamerIdSelected === gamer.id">
+                        <i class="bi bi-trash3-fill" ></i>
+                    </button>                    
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

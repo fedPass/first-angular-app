@@ -1,0 +1,13 @@
+@import "src/app/theme/variables";
+.cellBox {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+        font-weight: bold;
+        font-size: 25px;
+        color: $primary;
+    }
+}

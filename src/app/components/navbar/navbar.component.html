@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/home']">
+            <img src="assets/logo-ang-small.svg" alt="logo angular" width="30" height="24">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <!-- usiamo il router invece delle href -->
+                    <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/gamers']" routerLinkActive="active">Gamers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/assignments']" routerLinkActive="active">Assignments</a>
+                </li>     
+            </ul>
+            <!-- inserisco nel form #nfRef e ngSubmit -->
+            <form class="d-flex" #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)" >
+                <!-- negli input inseriamo attr name e ngModel -->
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" ngModel>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-xs-6 col-md-4">
+            <select class="form-select" (change)="onSelectedChange($event)">
+                <option selected>Seleziona ordinamento</option>
+                <option value="name">Nome</option>
+                <option value="-released">Data di rilascio</option>
+                <option value="-added">Data caricamento</option>
+                <option value="-rating">Rating</option>
+            </select>
+        </div>  
+    </div>
+    <!-- <ng-container *ngIf="gameService.getGames().length; else noResults"> -->
+    <ng-container *ngIf="games.length; else noResults">
+        <!-- <p *ngIf="selectedGameTitle.length > 2">Hai selezionato {{selectedGameTitle}}</p> -->
+        <div class="row flex-wrap">
+            <!-- <div class="col-sm-12 col-md-3 mb-3" *ngFor="let game of gameService.getGames()"> -->
+            <div class="col d-flex justify-content-center my-3" *ngFor="let game of games">
+                <app-card
+                    [game]="game"
+                    (selectedGame)="showTitle($event)"
+                ></app-card>  
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noResults>
+        <p>no results!</p>
+    </ng-template>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <!-- btn prev -->
+          <li class="page-item" [class.disabled]="currentPage <= 1">
+            <span class="page-link" (click)="onPrev()">
+              <span aria-hidden="true">&laquo;</span>
+            </span>
+          </li>
+           <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+          <li class="page-item"><span class="page-link">{{currentPage}}</span></li>
+          <!-- <li class="page-item"><span class="page-link">3</span></li>  -->
+          <!-- btn next -->
+          <li class="page-item" [class.disabled]="currentPage >= lastPage">
+            <span class="page-link" (click)="onNext()">
+              <span aria-hidden="true">&raquo;</span>
+            </span>
+          </li>
+        </ul>
+    </nav>
+</div>

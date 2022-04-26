@@ -1,0 +1,29 @@
+@import "src/app/theme/variables";
+@import url('https://fonts.googleapis.com/css2?family=Sarala:wght@700&display=swap');
+
+.jumbotron {
+    font-family: 'Sarala', sans-serif;
+    position: relative;
+    background-size: cover;
+    z-index: 5;
+    // backdrop-filter: grayscale(0.5) opacity(0.8);
+    // filter: grayscale(70%);
+    i {
+        color: $primary;
+        text-shadow: $text-shadow;
+    }
+    .overlay{
+        @include positionAbsoluteJumbotron;
+        background-color: #a6e5d2a6;
+        z-index: -1;
+    } 
+    h1 {
+        letter-spacing: 1px;
+        text-shadow: $text-shadow;
+    }
+}
+
+hr {
+    color: $primary-dark;
+    height: 5px;
+}

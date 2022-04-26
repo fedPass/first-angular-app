@@ -1,0 +1,20 @@
+//sto sovrascrivendo la regola assegnata da bootstrap a $primary
+$primary: #009688;
+$primary-dark: #00796B;
+$primaryLight: #B2DFDB;
+$text-primary: #212121;
+$text-secondary: #757575;
+$divider-color : #BDBDBD;
+$box-bkg: #f5f5f5;
+$custom-box-shadow: 5px 5px 15px 3px rgba(204,204,204,0.8);
+$text-shadow: 2px 2px 3px #ffffffde;
+
+@mixin positionAbsoluteJumbotron {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

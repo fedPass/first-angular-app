@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center pt-5 pb-2">
+            <i class="bi bi-globe"></i> Ciao mondo <i class="bi bi-flower1"></i>
+        </h1>
+        <p class="text-center fs-4">Pagina per appunti ed esercizi</p>
+    </div>
+    <!-- <ol class="list-group list-group-numbered">
+        <li class="list-group-item exercise-box">
+            <h4 class="text-center pt-3 pb-2">Es Property binding</h4>
+            <div class="col-6 m-auto mt-2 mb-2">
+                <button [class]="btnClass" [disabled]="!allowPropertyBinding">Aspetta 5 sec</button>
+            </div>
+        </li>
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Cras justo odio</li>
+    </ol> -->
+
+    <div class="row exercise-box">
+        <h4 class="pt-3 pb-2">Es String InterpolaTion & Property binding</h4>
+        <p>This is {{ title }}</p>
+        <div class="d-flex justify-content-around mt-2 mb-2">
+            <button [class]="btnClass" 
+                [disabled]="!allowPropertyBinding"
+            >{{btnText}}</button>
+            <button class="btn btn-primary" 
+                (click)="changeText()"
+            >Change title</button>
+        </div>
+    </div>
+
+    <!-- forma easy forse-->
+    <div class="row exercise-box">
+        <h4 class="pt-3 pb-2">#1 Un componente più messaggi</h4>
+        <app-alert [alertText]="'Messaggio di SUCCESSO'" [alertClass]="'alert alert-success'">
+        </app-alert>
+        <app-alert [alertText]="'Messaggio di ERRORE'" [alertClass]="'alert alert-danger'">
+        </app-alert>
+    </div>
+    <!-- direttiva strutt ngIf -->
+    <div class="row exercise-box">
+        <h4 class="pt-3 pb-2">Dir. strut. ngIf</h4>
+        <app-alert *ngIf="isActive; else elseAlert" [alertText]="'Ci sono perchè isActive è true'"
+            [alertClass]="'alert alert-info'">
+            ></app-alert>
+        <ng-template #elseAlert>
+            <app-alert [alertText]="'Ci sono perchè isActive è false e sono entrato nel elseAlert'"
+                [alertClass]="'alert alert-info'">
+            </app-alert>
+        </ng-template>
+    </div>
+    <!-- direttiva strutt ngFor -->
+    <!-- <div class="row exercise-box">
+        <h4 class="text-center pt-3 pb-2">Dir. strut. ngFor</h4>
+    </div> -->
+    <!-- esercizio #2 -->
+    <div class="row exercise-box">
+        <h4 class="pt-3 pb-2">#2 Two Way-Binding et co.</h4>
+        <div class="row ">
+            <div class="col-12 d-flex justify-content-center">
+                <input type="text" placeholder="Digita qualcosa" [(ngModel)]="inputText">
+                <button class="btn btn-success ms-2 me-2" [disabled]="inputText===''"
+                    (click)="resetInput()">Reset</button>
+                <button class="btn btn-success ms-2 me-2" [disabled]="inputText===''" (click)="addInputInList()">Add
+                </button>
+            </div>
+        </div>
+        <div class="row mt-2" *ngIf="showOutput">
+            <div class="col-12">
+                <p>Output: [ {{inputText}} ]</p>
+            </div>
+        </div>
+        <div class="row mt-2" *ngIf="showList">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let element of inputList">{{element}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row exercise-box">
+        <h4 class="pt-3 pb-2">Tic Tac Toe</h4>
+        <app-tictactoe [initialPlayer]="initialPlayer"></app-tictactoe>
+    </div>
+</div>
